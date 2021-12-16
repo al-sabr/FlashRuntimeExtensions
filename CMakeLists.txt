@@ -14,7 +14,7 @@ if (WIN32)
   endif()
 endif()
 
-project(flash-runtime-extensions VERSION 1.0
+project(flash-runtime-extensions VERSION 1.5
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
              HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
@@ -24,7 +24,6 @@ target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_SOURCE_DIR}/${OBJ_LIB})
 
 #target_include_directories(${PROJECT_NAME} INTERFACE include)
 
-
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}-targets
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -32,14 +31,7 @@ install(TARGETS ${PROJECT_NAME}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlashRuntimeExtensions.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/)
-
-message("ARCHIVE DESTINATION " ${CMAKE_INSTALL_LIBDIR})
-message("LIBRARY DESTINATION " ${CMAKE_INSTALL_LIBDIR})
-message("RUNTIME DESTINATION " ${CMAKE_INSTALL_BINDIR})
-
-message(CMAKE_INSTALL_PREFIX " ${CMAKE_INSTALL_PREFIX}")
-message(CMAKE_INSTALL_NAME_DIR " ${CMAKE_INSTALL_NAME_DIR}")
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlashRuntimeExtensions.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})
 
 install(EXPORT ${PROJECT_NAME}-targets
         FILE ${PROJECT_NAME}-targets.cmake
@@ -61,10 +53,6 @@ write_basic_package_version_file("${PROJECT_NAME}-config-version.cmake"
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
-  #DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
-
-#install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlashRuntimeExtensions.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})
-
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
 
 install(FILES ${OBJ_LIB} DESTINATION ${CMAKE_INSTALL_LIBDIR}/)
