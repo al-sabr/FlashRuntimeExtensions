@@ -16,7 +16,7 @@ endif()
 
 project(FlashRuntimeExtensions VERSION 0.1
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
-             HOMEPAGE_URL "https://github.com/al-sabr/air-sdk-ane")
+             HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
 add_library(${PROJECT_NAME} INTERFACE)
 
@@ -24,15 +24,21 @@ target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_SOURCE_DIR}/${OBJ_LIB})
 
 target_include_directories(
   ${PROJECT_NAME}
-  INTERFACE $<BUILD_INTERFACE:${${PROJECT_NAME}_SOURCE_DIR}/include>
-            $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+  INTERFACE  $<BUILD_INTERFACE:include>
+          $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
+message(BUILD_INTERFACE " $<BUILD_INTERFACE:include>")
+message(INSTALL_INTERFACE " $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
             
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}_Targets
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+message(ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+message(LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+message(RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
@@ -44,6 +50,8 @@ configure_package_config_file(
   "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
   INSTALL_DESTINATION
   ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
+
+message(INSTALL_DESTINATION " ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake")
 
 install(EXPORT ${PROJECT_NAME}_Targets
         FILE ${PROJECT_NAME}Targets.cmake
