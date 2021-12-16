@@ -14,7 +14,7 @@ if (WIN32)
   endif()
 endif()
 
-project(flash-runtime-extensions VERSION 1.5
+project(flash-runtime-extensions VERSION 1.6
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
              HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
@@ -22,7 +22,7 @@ add_library(${PROJECT_NAME} INTERFACE)
 
 target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_SOURCE_DIR}/${OBJ_LIB})
 
-#target_include_directories(${PROJECT_NAME} INTERFACE include)
+include_directories(${PROJECT_NAME} INTERFACE include)
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}-targets
