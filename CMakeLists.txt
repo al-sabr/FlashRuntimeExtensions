@@ -44,7 +44,7 @@ configure_package_config_file(
   "${PROJECT_SOURCE_DIR}/cmake/FlashRuntimeExtensionsConfig.cmake.in"
   "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
   INSTALL_DESTINATION
-  ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
+  ${CMAKE_INSTALL_LIBDIR}/share/${PROJECT_NAME})
 
 message(CMAKE_INSTALL_PREFIX " ${CMAKE_INSTALL_PREFIX}")
 message(CMAKE_INSTALL_NAME_DIR " ${CMAKE_INSTALL_NAME_DIR}")
@@ -53,6 +53,11 @@ install(EXPORT ${PROJECT_NAME}_Targets
         FILE ${PROJECT_NAME}-targets.cmake
         NAMESPACE ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
+
+install_files(FILES
+  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
+  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/cmake/${PROJECT_NAME})
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlashRuntimeExtensions.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})
 install(FILES ${OBJ_LIB} DESTINATION ${CMAKE_INSTALL_LIBDIR}/)
