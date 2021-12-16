@@ -14,7 +14,7 @@ if (WIN32)
   endif()
 endif()
 
-project(flash-runtime-extensions VERSION 1.6
+project(flash-runtime-extensions VERSION 1.8
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
              HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
