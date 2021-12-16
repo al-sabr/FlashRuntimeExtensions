@@ -14,7 +14,7 @@ if (WIN32)
   endif()
 endif()
 
-project(flash-runtime-extensions VERSION 0.1
+project(flash-runtime-extensions VERSION 1.0
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
              HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
@@ -54,9 +54,9 @@ install(EXPORT ${PROJECT_NAME}_Targets
         NAMESPACE ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
 
-install_files(FILES
-  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
-  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake
   DESTINATION ${CMAKE_INSTALL_PREFIX}/cmake/${PROJECT_NAME})
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlashRuntimeExtensions.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})
