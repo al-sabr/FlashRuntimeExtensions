@@ -22,7 +22,7 @@ add_library(${PROJECT_NAME} INTERFACE)
 
 target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_SOURCE_DIR}/${OBJ_LIB})
 
-include_directories(${PROJECT_NAME} INTERFACE include)
+target_include_directories(${PROJECT_NAME} INTERFACE /include)
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}-targets
