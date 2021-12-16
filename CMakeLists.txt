@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.12)
 
+project(flash-runtime-extensions VERSION 1.9
+             DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
+             HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
+
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(IS_64BITS TRUE)
 elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
@@ -8,21 +12,17 @@ endif()
 
 if (WIN32)
   if(IS_64BITS)
+    message("64 Bits System detected")
     set(OBJ_LIB "lib/win64/FlashRuntimeExtensions.lib")
   else()
+    message("32 Bits System detected")
     set(OBJ_LIB "lib/win32/FlashRuntimeExtensions.lib")
   endif()
 endif()
 
-project(flash-runtime-extensions VERSION 1.8
-             DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
-             HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
-
 add_library(${PROJECT_NAME} INTERFACE)
 
 target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_SOURCE_DIR}/${OBJ_LIB})
-
-include_directories(include)
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}-targets
@@ -32,6 +32,8 @@ install(TARGETS ${PROJECT_NAME}
         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/FlashRuntimeExtensions.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})
+
+target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_INSTALL_PREFIX}/include/${PROJECT_NAME})
 
 install(EXPORT ${PROJECT_NAME}-targets
         FILE ${PROJECT_NAME}-targets.cmake
