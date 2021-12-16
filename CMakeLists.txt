@@ -14,7 +14,7 @@ if (WIN32)
   endif()
 endif()
 
-project(FlashRuntimeExtensions VERSION 0.1
+project(flash-runtime-extensions VERSION 0.1
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
              HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
@@ -31,28 +31,28 @@ install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
-message(ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-message(LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-message(RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+message("ARCHIVE DESTINATION " ${CMAKE_INSTALL_LIBDIR})
+message("LIBRARY DESTINATION " ${CMAKE_INSTALL_LIBDIR})
+message("RUNTIME DESTINATION " ${CMAKE_INSTALL_BINDIR})
 
 include(CMakePackageConfigHelpers)
-write_basic_package_version_file("${PROJECT_NAME}ConfigVersion.cmake"
+write_basic_package_version_file("${PROJECT_NAME}-config-version.cmake"
                                  VERSION ${PROJECT_VERSION}
                                  COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
-  "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in"
-  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+  "${PROJECT_SOURCE_DIR}/cmake/FlashRuntimeExtensionsConfig.cmake.in"
+  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
   INSTALL_DESTINATION
-  ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/cmake)
+  ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
 
 message(CMAKE_INSTALL_PREFIX " ${CMAKE_INSTALL_PREFIX}")
 message(CMAKE_INSTALL_NAME_DIR " ${CMAKE_INSTALL_NAME_DIR}")
 
 install(EXPORT ${PROJECT_NAME}_Targets
-        FILE ${PROJECT_NAME}Targets.cmake
+        FILE ${PROJECT_NAME}-targets.cmake
         NAMESPACE ${PROJECT_NAME}::
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/cmake)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(FILES ${OBJ_LIB} DESTINATION ${CMAKE_INSTALL_LIBDIR}/)
