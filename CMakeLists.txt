@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(flash-runtime-extensions VERSION 1.9
+project(flash-runtime-extensions VERSION 2.0
              DESCRIPTION "Required headers to be able to compile an Adobe Native Extension on Windows/MacOs/Linux"
              HOMEPAGE_URL "https://github.com/al-sabr/FlashRuntimeExtensions")
 
