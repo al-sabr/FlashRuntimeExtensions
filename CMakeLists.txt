@@ -10,19 +10,19 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     set(IS_64BITS FALSE)
 endif()
 
+set(FRE_LIBRARY "FlashRuntimeExtensions.lib")
+
 if (WIN32)
   if(IS_64BITS)
     message("64 Bits System detected")
-    set(OBJ_LIB "lib/win64/FlashRuntimeExtensions.lib")
+    set(OBJ_LIB "lib/win64/${FRE_LIBRARY}")
   else()
     message("32 Bits System detected")
-    set(OBJ_LIB "lib/win32/FlashRuntimeExtensions.lib")
+    set(OBJ_LIB "lib/win32/${FRE_LIBRARY}")
   endif()
 endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
-
-target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_SOURCE_DIR}/${OBJ_LIB})
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}-targets
@@ -58,3 +58,5 @@ install(FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME})
 
 install(FILES ${OBJ_LIB} DESTINATION ${CMAKE_INSTALL_LIBDIR}/)
+
+target_link_libraries(${PROJECT_NAME} INTERFACE ${CMAKE_INSTALL_LIBDIR}/${FRE_LIBRARY})
