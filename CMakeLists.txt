@@ -10,15 +10,15 @@ elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
     set(IS_64BITS FALSE)
 endif()
 
-set(FRE_LIBRARY "FlashRuntimeExtensions.lib")
+set(FRE_LIBRARY "FlashRuntimeExtensions")
 
 if (WIN32)
   if(IS_64BITS)
     message("64 Bits System detected")
-    set(OBJ_LIB "lib/win64/${FRE_LIBRARY}")
+    set(OBJ_LIB "lib/win64/${FRE_LIBRARY}.lib")
   else()
     message("32 Bits System detected")
-    set(OBJ_LIB "lib/win32/${FRE_LIBRARY}")
+    set(OBJ_LIB "lib/win32/${FRE_LIBRARY}.lib")
   endif()
 endif()
 
